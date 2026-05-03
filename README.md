@@ -1,56 +1,63 @@
 # VendNest
 
-Full-stack demo app: **FastAPI** (Python) and **Next.js 14** (App Router, TypeScript, Tailwind).
+VendNest is a full-stack marketplace web application built with **FastAPI**, **Next.js 14**, **TypeScript**, and **Tailwind CSS**. It includes user authentication, product browsing, admin product management, cart handling, and a simple order checkout flow.
 
-## What it does
+The project is designed as an end-to-end e-commerce platform starter that can run locally with SQLite or through Docker using PostgreSQL.
 
-- JWT login/register, role-based admin.
-- Product listing with search; admins manage inventory.
-- Cart stored in the browser; checkout creates a demo order record.
-- Run against **PostgreSQL** (Docker) or **SQLite** for a quick local trial.
+## Features
 
-## Run locally (no Docker)
+- User registration and login with JWT authentication
+- Role-based admin access for managing products
+- Product catalog with search support
+- Cart flow using browser local storage
+- Checkout endpoint that creates an order and updates product stock
+- Mock payment endpoint for marking orders as paid
+- FastAPI backend with automatic OpenAPI documentation
+- Next.js App Router frontend styled with Tailwind CSS
+- PostgreSQL support through Docker Compose
+- SQLite fallback for quick local development
 
-### Backend
+## Tech Stack
 
-```bash
-cd backend
-python -m venv .venv && source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env  # optional
-uvicorn app.main:app --reload
-```
+**Frontend**
 
-API: http://127.0.0.1:8000 — interactive docs at `/docs`.
+- Next.js 14
+- React 18
+- TypeScript
+- Tailwind CSS
+- SWR
 
-### Frontend
+**Backend**
 
-```bash
-cd frontend
-npm install
-npm run dev
-```
+- FastAPI
+- SQLAlchemy
+- JWT authentication
+- SQLite / PostgreSQL
+- Uvicorn
 
-App: http://localhost:3000  
+## Project Structure
 
-Create an account at `/register`, then sign in. Grant admin by updating the database (see `backend/app/seed_admin.py`).
-
-## Docker Compose
-
-```bash
-docker compose up --build
-```
-
-- App: http://localhost:3000  
-- API: http://localhost:8000  
-
-## Configuration
-
-See `backend/.env.example` and `frontend/.env.local.example`.
-
-## Routes
-
-- `/` — storefront  
-- `/login`, `/register`  
-- `/cart`  
-- `/admin/products` — CRUD (admin)
+```text
+.
+├── backend/
+│   ├── app/
+│   │   ├── routers/
+│   │   │   ├── auth.py
+│   │   │   ├── orders.py
+│   │   │   └── products.py
+│   │   ├── db.py
+│   │   ├── deps.py
+│   │   ├── main.py
+│   │   ├── models.py
+│   │   ├── schemas.py
+│   │   └── security.py
+│   └── requirements.txt
+├── frontend/
+│   ├── app/
+│   │   ├── admin/products/
+│   │   ├── cart/
+│   │   ├── login/
+│   │   ├── register/
+│   │   └── page.tsx
+│   └── package.json
+└── docker-compose.yml
